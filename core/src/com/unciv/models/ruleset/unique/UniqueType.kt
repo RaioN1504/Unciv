@@ -880,9 +880,10 @@ enum class UniqueType(
     MarkTutorialComplete("Mark tutorial [comment] complete", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenNoConditionals),
     PlaySound("Play [comment] sound", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenToUsers,
         docDescription = "See [Images and Audio](Images-and-Audio.md#sounds) for a list of available sounds."),
+    MarkCivilization("Mark Civilization as [comment]", UniqueTarget.Triggerable),
 
     //endregion
-    
+
     ///////////////////////////////////////// region 09 UNIT TRIGGERABLES /////////////////////////////////////////
 
     OneTimeUnitHeal("[unitTriggerTarget] heals [positiveAmount] HP", UniqueTarget.UnitTriggerable),

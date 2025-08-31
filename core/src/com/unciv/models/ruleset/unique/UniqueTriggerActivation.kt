@@ -156,6 +156,16 @@ object UniqueTriggerActivation {
                 }
             }
 
+            UniqueType.MarkCivilization -> {
+                val uniqueTagName = unique.params[0]
+                if (uniqueTagName.isEmpty()) return null
+                if (civInfo.nation.uniqueMap.hasTagUnique(uniqueTagName)) return null
+                return {
+                    civInfo.nation.uniqueMap.addUnique(Unique(uniqueTagName))
+                    true
+                }
+            }
+
             UniqueType.OneTimeFreeUnit -> {
                 val unitName = unique.params[0]
                 val baseUnit = ruleset.units[unitName] ?: return null

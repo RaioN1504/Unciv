@@ -237,7 +237,11 @@ enum class UniqueParameterType(
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) = when (parameterText) {
             in staticKnownValues -> true
             in ruleset.nations -> true
-            else -> ruleset.nations.values.any { it.hasTagUnique(parameterText) }
+            else ->
+                ruleset.nations.values.any { it.hasTagUnique(parameterText) } ||
+                ruleset.allRulesetObjects().any {
+                    it.getMatchingUniques(UniqueType.MarkCivilization).any { it.params[0] == parameterText }
+                }
         }
 
         override fun getKnownValuesForAutocomplete(ruleset: Ruleset): Set<String> =
