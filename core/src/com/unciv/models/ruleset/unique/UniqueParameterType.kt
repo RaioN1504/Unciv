@@ -237,15 +237,18 @@ enum class UniqueParameterType(
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) = when (parameterText) {
             in staticKnownValues -> true
             in ruleset.nations -> true
-            else ->
-                ruleset.nations.values.any { it.hasTagUnique(parameterText) } ||
-                ruleset.allRulesetObjects().any {
-                    it.getMatchingUniques(UniqueType.MarkCivilization).any { it.params[0] == parameterText }
-                }
+            else -> Tag.isKnownValue(parameterText, ruleset)
         }
 
         override fun getKnownValuesForAutocomplete(ruleset: Ruleset): Set<String> =
             staticKnownValues + ruleset.nations.keys
+    },
+
+    Tag("tag", "Omnipotent", "A tagged unique (verbatim, no placeholders)") {
+        override fun getErrorSeverity(parameterText: String, ruleset: Ruleset) = getErrorSeverityForFilter(parameterText, ruleset)
+        override fun isKnownValue(parameterText: String, ruleset: Ruleset) =
+            ruleset.nations.values.any { it.hasTagUnique(parameterText) } ||
+            ruleset.allUniques().any { it.type == UniqueType.MarkCivilizationAsTag && it.params[0] == parameterText }
     },
 
     /** Implemented by [City.matchesFilter][com.unciv.logic.city.City.matchesFilter] */

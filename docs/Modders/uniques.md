@@ -241,8 +241,8 @@ Simple unique parameters are explained by mouseover. Complex parameters are expl
 
 	Applicable to: Triggerable
 
-??? example  "Mark Civilization as [comment]"
-	Example: "Mark Civilization as [comment]"
+??? example  "Mark Civilization as [tag]"
+	Example: "Mark Civilization as [Omnipotent]"
 
 	Applicable to: Triggerable
 
@@ -3966,6 +3966,7 @@ There is a conversion affecting dashes and leading/trailing blanks. Please make 
 *[stats]: For example: `+2 Production, +3 Food`. Note that the stat names need to be capitalized!
 *[stockpile]: The name of any stockpiled resource.
 *[stockpiledResource]: The name of any stockpiled resource.
+*[tag]: A tagged unique (verbatim, no placeholders).
 *[tech]: The name of any tech.
 *[terrainFeature]: The name of any terrain that is a terrain feature according to the json file.
 *[tileFilter]: Anything that can be used either in an improvementFilter or in a terrainFilter can be used here, plus 'unimproved'
