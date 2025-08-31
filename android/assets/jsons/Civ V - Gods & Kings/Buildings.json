@@ -11,10 +11,7 @@
 		"culture": 1,
 		"cityStrength": 2.5,
 		"cost": 0,
-		"uniques": [
-            "Indicates the capital city",
-            "[+500 Gold] <for [Cool] Civilizations>"
-        ]
+		"uniques": ["Indicates the capital city"]
 	},
 	{
 		"name": "Monument",
