@@ -740,7 +740,7 @@ enum class UniqueParameterType(
             when (tagTarget) {
                 "Nation" -> ruleset.nations.values.any { it.hasTagUnique(parameterText) }
                 "Unit" -> ruleset.units.values.any { it.hasTagUnique(parameterText) }
-                else -> false
+                else -> throw IllegalArgumentException("Unknown tagTarget: $tagTarget")
             } || ruleset.allUniques().any { it.type == UniqueType.MarkTargetAsTag && it.params[0] == tagTarget && it.params[1] == parameterText }
 
         /** Emulate legacy behaviour as exactly as possible */
