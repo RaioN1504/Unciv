@@ -880,7 +880,7 @@ enum class UniqueType(
     MarkTutorialComplete("Mark tutorial [comment] complete", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenNoConditionals),
     PlaySound("Play [comment] sound", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenToUsers,
         docDescription = "See [Images and Audio](Images-and-Audio.md#sounds) for a list of available sounds."),
-    MarkCivilizationAsTag("Mark Civilization as [tag]", UniqueTarget.Triggerable),
+    MarkTargetAsTag("Mark [tagTarget] as [tag]", UniqueTarget.Triggerable),
 
     //endregion
 

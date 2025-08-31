@@ -241,8 +241,8 @@ Simple unique parameters are explained by mouseover. Complex parameters are expl
 
 	Applicable to: Triggerable
 
-??? example  "Mark Civilization as [tag]"
-	Example: "Mark Civilization as [Omnipotent]"
+??? example  "Mark [tagTarget] as [tag]"
+	Example: "Mark [Nation] as [Omnipotent]"
 
 	Applicable to: Triggerable
 
@@ -3967,6 +3967,7 @@ There is a conversion affecting dashes and leading/trailing blanks. Please make 
 *[stockpile]: The name of any stockpiled resource.
 *[stockpiledResource]: The name of any stockpiled resource.
 *[tag]: A tagged unique (verbatim, no placeholders).
+*[tagTarget]: `Nation`, or `Unit`.
 *[tech]: The name of any tech.
 *[terrainFeature]: The name of any terrain that is a terrain feature according to the json file.
 *[tileFilter]: Anything that can be used either in an improvementFilter or in a terrainFilter can be used here, plus 'unimproved'

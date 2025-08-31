@@ -144,9 +144,9 @@ enum class UniqueParameterType(
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) = when {
             parameterText in staticKnownValues -> true
             UnitName.getErrorSeverity(parameterText, ruleset) == null -> true
-            parameterText.isFilteringUniqueIn(ruleset.units) -> true
             UnitTypeFilter.isKnownValue(parameterText, ruleset) -> true
             TechFilter.isKnownValue(parameterText, ruleset) -> true
+            isKnownTag(parameterText, ruleset, "Unit") -> true
             else -> false
         }
 
@@ -237,7 +237,7 @@ enum class UniqueParameterType(
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) = when (parameterText) {
             in staticKnownValues -> true
             in ruleset.nations -> true
-            else -> Tag.isKnownValue(parameterText, ruleset)
+            else -> isKnownTag(parameterText, ruleset, "Nation")
         }
 
         override fun getKnownValuesForAutocomplete(ruleset: Ruleset): Set<String> =
@@ -247,8 +247,12 @@ enum class UniqueParameterType(
     Tag("tag", "Omnipotent", "A tagged unique (verbatim, no placeholders)") {
         override fun getErrorSeverity(parameterText: String, ruleset: Ruleset) = getErrorSeverityForFilter(parameterText, ruleset)
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) =
-            ruleset.nations.values.any { it.hasTagUnique(parameterText) } ||
-            ruleset.allUniques().any { it.type == UniqueType.MarkCivilizationAsTag && it.params[0] == parameterText }
+            isKnownTag(parameterText, ruleset, "Nation") ||
+            isKnownTag(parameterText, ruleset, "Unit")
+    },
+
+    TagTarget("tagTarget", "Nation", "`Nation`, or `Unit`") {
+        override val staticKnownValues = setOf("Nation", "Unit")
     },
 
     /** Implemented by [City.matchesFilter][com.unciv.logic.city.City.matchesFilter] */
@@ -730,6 +734,14 @@ enum class UniqueParameterType(
             }
             return result
         }
+
+        @Readonly
+        private fun isKnownTag(parameterText: String, ruleset: Ruleset, tagTarget: String): Boolean =
+            when (tagTarget) {
+                "Nation" -> ruleset.nations.values.any { it.hasTagUnique(parameterText) }
+                "Unit" -> ruleset.units.values.any { it.hasTagUnique(parameterText) }
+                else -> false
+            } || ruleset.allUniques().any { it.type == UniqueType.MarkTargetAsTag && it.params[0] == tagTarget && it.params[1] == parameterText }
 
         /** Emulate legacy behaviour as exactly as possible */
         private val translationWriterGuessingOrder = sequenceOf(

@@ -40,7 +40,7 @@
 		"upgradesTo": "Swordsman",
 		"uniques": [
             "May upgrade to [Spearman] through ruins-like effects",
-            "Mark Civilization as [Cool] <by consuming this unit>"
+            "Mark [Nation] as [Cool] <by consuming this unit>"
         ],
 		"attackSound": "nonmetalhit",
         "civilopediaText": [
