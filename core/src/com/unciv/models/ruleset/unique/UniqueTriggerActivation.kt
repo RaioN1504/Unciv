@@ -159,7 +159,7 @@ object UniqueTriggerActivation {
             UniqueType.MarkTargetAsTag -> {
                 val uniqueMap = when(unique.params[0]) {
                     "Nation" -> civInfo.nation.uniqueMap
-                    "Unit" -> unit?.baseUnit?.uniqueMap ?: return null
+                    "Unit type" -> unit?.baseUnit?.uniqueMap ?: return null
                     else -> return null
                 }
                 if (uniqueMap.hasTagUnique(unique.params[1])) return null
@@ -172,7 +172,7 @@ object UniqueTriggerActivation {
             UniqueType.MarkTargetAsNotTag -> {
                 val uniqueMap = when(unique.params[0]) {
                     "Nation" -> civInfo.nation.uniqueMap
-                    "Unit" -> unit?.baseUnit?.uniqueMap ?: return null
+                    "Unit type" -> unit?.baseUnit?.uniqueMap ?: return null
                     else -> return null
                 }
                 if (!uniqueMap.hasTagUnique(unique.params[1])) return null
