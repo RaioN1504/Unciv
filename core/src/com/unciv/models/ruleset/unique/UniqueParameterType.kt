@@ -735,13 +735,14 @@ enum class UniqueParameterType(
             return result
         }
 
+        /** Checks whether or not the given tag applies to the associated tagTarget. */
         @Readonly
-        private fun isKnownTag(parameterText: String, ruleset: Ruleset, tagTarget: String): Boolean =
+        private fun isKnownTag(tag: String, ruleset: Ruleset, tagTarget: String): Boolean =
             when (tagTarget) {
-                "Nation" -> ruleset.nations.values.any { it.hasTagUnique(parameterText) }
-                "Unit type" -> ruleset.units.values.any { it.hasTagUnique(parameterText) }
+                "Nation" -> ruleset.nations.values.any { it.hasTagUnique(tag) }
+                "Unit type" -> ruleset.units.values.any { it.hasTagUnique(tag) }
                 else -> throw IllegalArgumentException("Unknown tagTarget: $tagTarget")
-            } || ruleset.allUniques().any { it.type == UniqueType.MarkTargetAsTag && it.params[0] == tagTarget && it.params[1] == parameterText }
+            } || ruleset.allUniques().any { it.type == UniqueType.MarkTargetAsTag && it.params[0] == tagTarget && it.params[1] == tag }
 
         /** Emulate legacy behaviour as exactly as possible */
         private val translationWriterGuessingOrder = sequenceOf(

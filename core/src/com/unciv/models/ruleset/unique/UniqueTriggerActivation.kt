@@ -41,6 +41,7 @@ import com.unciv.utils.addToMapOfSets
 import com.unciv.utils.randomWeighted
 import kotlin.math.roundToInt
 import kotlin.random.Random
+import yairm210.purity.annotations.Readonly
 
 // Buildings, techs, policies, ancient ruins and promotions can have 'triggered' effects
 object UniqueTriggerActivation {
@@ -157,11 +158,7 @@ object UniqueTriggerActivation {
             }
 
             UniqueType.MarkTargetAsTag -> {
-                val uniqueMap = when(unique.params[0]) {
-                    "Nation" -> civInfo.nation.uniqueMap
-                    "Unit type" -> unit?.baseUnit?.uniqueMap ?: return null
-                    else -> return null
-                }
+                val uniqueMap = getMarkTargetUniqueMap(unique, civInfo, city, unit, tile) ?: return null
                 if (uniqueMap.hasTagUnique(unique.params[1])) return null
                 return {
                     uniqueMap.addUnique(Unique(unique.params[1]))
@@ -170,11 +167,7 @@ object UniqueTriggerActivation {
             }
 
             UniqueType.MarkTargetAsNotTag -> {
-                val uniqueMap = when(unique.params[0]) {
-                    "Nation" -> civInfo.nation.uniqueMap
-                    "Unit type" -> unit?.baseUnit?.uniqueMap ?: return null
-                    else -> return null
-                }
+                val uniqueMap = getMarkTargetUniqueMap(unique, civInfo, city, unit, tile) ?: return null
                 if (!uniqueMap.hasTagUnique(unique.params[1])) return null
                 return {
                     uniqueMap.removeTagUnique(unique.params[1])
@@ -1238,6 +1231,24 @@ object UniqueTriggerActivation {
         }
     }
 
+    /**
+     * Gets the target unique map for "Mark [tagTarget]".
+     *
+     * @see UniqueType.MarkTargetAsTag
+     * @see UniqueType.MarkTargetAsNotTag
+     */
+    @Readonly
+    private fun getMarkTargetUniqueMap(unique: Unique, civInfo: Civilization,
+        city: City? = null,
+        unit: MapUnit? = null,
+        tile: Tile? = city?.getCenterTile() ?: unit?.currentTile): UniqueMap? =
+            when(unique.params[0]) {
+                "Nation" -> civInfo.nation.uniqueMap
+                "Unit type" -> unit?.baseUnit?.uniqueMap ?: null
+                else -> null
+            }
+
+    @Readonly
     private fun getNotificationText(notification: String?, triggerNotificationText: String?, effectNotificationText: String): String? {
         return if (!notification.isNullOrEmpty()) notification
         else if (triggerNotificationText != null)
