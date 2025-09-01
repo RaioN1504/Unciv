@@ -244,7 +244,7 @@ enum class UniqueParameterType(
             staticKnownValues + ruleset.nations.keys
     },
 
-    Tag("tag", "Omnipotent", "A tagged unique (verbatim, no placeholders)") {
+    Tag("tag", "Communist", "A tagged unique (verbatim, no placeholders)") {
         override fun getErrorSeverity(parameterText: String, ruleset: Ruleset) = getErrorSeverityForFilter(parameterText, ruleset)
         override fun isKnownValue(parameterText: String, ruleset: Ruleset) =
             isKnownTag(parameterText, ruleset, "Nation") ||

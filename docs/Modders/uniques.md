@@ -242,7 +242,16 @@ Simple unique parameters are explained by mouseover. Complex parameters are expl
 	Applicable to: Triggerable
 
 ??? example  "Mark [tagTarget] as [tag]"
-	Example: "Mark [Nation] as [Omnipotent]"
+	Adds a unique tag to either a Nation or a Base Unit.
+
+	Example: "Mark [Nation] as [Communist]"
+
+	Applicable to: Triggerable
+
+??? example  "Mark [tagTarget] as not [tag]"
+	Removes a unique tag from the target.
+
+	Example: "Mark [Nation] as not [Communist]"
 
 	Applicable to: Triggerable
 

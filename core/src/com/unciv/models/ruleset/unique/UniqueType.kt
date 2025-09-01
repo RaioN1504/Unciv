@@ -880,7 +880,10 @@ enum class UniqueType(
     MarkTutorialComplete("Mark tutorial [comment] complete", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenNoConditionals),
     PlaySound("Play [comment] sound", UniqueTarget.Triggerable, flags = UniqueFlag.setOfHiddenToUsers,
         docDescription = "See [Images and Audio](Images-and-Audio.md#sounds) for a list of available sounds."),
-    MarkTargetAsTag("Mark [tagTarget] as [tag]", UniqueTarget.Triggerable),
+    MarkTargetAsTag("Mark [tagTarget] as [tag]", UniqueTarget.Triggerable,
+        docDescription = "Adds a unique tag to either a Nation or a Base Unit."),
+    MarkTargetAsNotTag("Mark [tagTarget] as not [tag]", UniqueTarget.Triggerable,
+        docDescription = "Removes a unique tag from the target."),
 
     //endregion
 
